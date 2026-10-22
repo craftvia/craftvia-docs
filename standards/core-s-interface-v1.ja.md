@@ -118,21 +118,25 @@ Host推奨供給範囲は3.135～3.465 Vです。Core単体の暫定設計目標
 
 Core-S G031 Rev0では、N3とN4が別の抵抗を介して同じPA14/BOOT0へ接続されます。N4を駆動する前にSWCLKドライバを分離してください。
 
-## 7. 任意プロファイル
+## 7. 任意開発ポートプロファイル
 
-### 7.1 N2/N3 USB
+詳細要件は[Core-S共通デバッグ／書き込み／USBポート v1](core-s-debug-port-v1.ja.md)で定義します。
 
-Coreは`N2=USB_D-`、`N3=USB_D+`のUSB 2.0 Deviceプロファイルを宣言できます。すべてのCore-SでUSBを保証するものではありません。
+### 7.1 N5/N6拡張デバッグ
 
-PHY固有部品はCore、CC・VBUS保護・ESD・経路選択はStationで担当します。USB選択時はN2/N3からSWD等のドライバを分離します。
+Coreは`N5=DBG_AUX0`、`N6=DBG_AUX1`を宣言できます。共通JTAG ProfileはN5へTDI、N6へTDOを割り当て、SWD Trace ProfileはN6へSWOを割り当てられます。明示宣言がない場合、StationはN5/N6を実装固有端子として扱い、Debug driverを接続しません。
 
-### 7.2 N7/N8拡張デバッグ
+### 7.2 N7/N8 Native USB
 
-Coreは`N7=DBG_AUX0`、`N8=DBG_AUX1`を宣言できます。宣言がない場合、StationはN7/N8へデバッグドライバを接続しません。
+Coreは`N7=USB_DM`、`N8=USB_DP`のUSB 2.0 Device Profileを宣言できます。すべてのCore-SでUSBを保証するものではありません。宣言がない場合、StationはN7/N8を実装固有端子として扱い、USB経路を分離します。
+
+MCU／PHY固有のtermination、pull、bias、電源decoupling、ClockはCoreが担当します。Connector側CC、VBUS保護、ESD保護、経路分離はStationが担当します。USB VBUSをCore-Sの+3V3へ直結しません。
+
+過去の未検証Draftにあった`N2=USB_D-`、`N3=USB_D+` Profileは撤回し、新規Core設計へ使用しません。N2/N3は選択Profileの基本Debug／Data端子として維持します。
 
 ## 8. 実装固有端子
 
-`N5-N8`、`E1-E8`、`S1-S8`、`W1-W8`は物理位置だけが共通です。個別仕様は各端子のMCU／回路ノード、package pin、代表AF、RESET・未給電時状態、電気条件、競合、NC／予約状態を公開します。
+Coreが任意開発ポートProfileを宣言しない場合、`N5-N8`は実装固有です。`E1-E8`、`S1-S8`、`W1-W8`は常に物理位置だけが共通です。個別仕様は各端子のMCU／回路ノード、package pin、代表AF、RESET・未給電時状態、電気条件、競合、NC／予約状態を公開します。
 
 ## 9. Host要件
 

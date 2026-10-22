@@ -18,6 +18,7 @@
 | 用語集 | [`project/glossary.md`](project/glossary.md)／[`glossary.ja.md`](project/glossary.ja.md) |
 | Versionと状態 | [`standards/versioning-and-status.md`](standards/versioning-and-status.md)／[`versioning-and-status.ja.md`](standards/versioning-and-status.ja.md) |
 | Core-S Interface v1 | [`standards/core-s-interface-v1.md`](standards/core-s-interface-v1.md)／[`core-s-interface-v1.ja.md`](standards/core-s-interface-v1.ja.md) |
+| Core-S共通デバッグ／書き込み／USBポート v1 | [`standards/core-s-debug-port-v1.md`](standards/core-s-debug-port-v1.md)／[`core-s-debug-port-v1.ja.md`](standards/core-s-debug-port-v1.ja.md) |
 | 互換性方針・Matrix | [`standards/compatibility.md`](standards/compatibility.md)／[`compatibility.ja.md`](standards/compatibility.ja.md) |
 | Rev0 Getting Started | [`guides/getting-started.md`](guides/getting-started.md)／[`getting-started.ja.md`](guides/getting-started.ja.md) |
 

@@ -18,6 +18,7 @@ Product-specific editable design sources, manufacturing files, and release notes
 | Terminology | [`project/glossary.md`](project/glossary.md) |
 | Versioning and status | [`standards/versioning-and-status.md`](standards/versioning-and-status.md) |
 | Core-S interface v1 | [`standards/core-s-interface-v1.md`](standards/core-s-interface-v1.md) |
+| Core-S debug, programming, and USB port v1 | [`standards/core-s-debug-port-v1.md`](standards/core-s-debug-port-v1.md) |
 | Compatibility policy and matrix | [`standards/compatibility.md`](standards/compatibility.md) |
 | Rev0 getting started | [`guides/getting-started.md`](guides/getting-started.md) |
 

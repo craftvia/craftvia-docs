@@ -118,21 +118,25 @@ An STM32 Core claiming **Core-S v1 STM32 System Compatible** MUST implement:
 
 For Core-S G031 Rev0, N3 and N4 reach the same PA14/BOOT0 MCU pin through different resistors. A host MUST isolate the SWCLK driver before actively driving `SYS_BOOT`.
 
-## 7. Optional profiles
+## 7. Optional development-port profiles
 
-### 7.1 USB on N2/N3
+Detailed requirements are defined by [Core-S Debug, Programming, and USB Port v1](core-s-debug-port-v1.md).
 
-A Core MAY declare a USB 2.0 device profile using `N2=USB_D-` and `N3=USB_D+`. This does not make USB universal across Core-S products.
+### 7.1 Extended debug on N5/N6
 
-The Core supplies PHY-specific series or bias parts. The Station supplies the connector-side CC, VBUS protection, ESD protection, and path selection. A selected USB path must be electrically isolated from SWD or any other driver on N2/N3.
+A Core MAY declare `N5=DBG_AUX0` and `N6=DBG_AUX1`. The common JTAG profile assigns TDI to N5 and TDO to N6; the SWD trace profile may assign SWO to N6. Without an explicit declaration, a Station must treat N5/N6 as implementation-specific contacts and must not connect a debug driver to them.
 
-### 7.2 Extended debug on N7/N8
+### 7.2 Native USB on N7/N8
 
-A Core MAY declare `N7=DBG_AUX0` and `N8=DBG_AUX1`. Without that declaration, a Station must treat N7/N8 as implementation-specific contacts and must not connect a debug driver to them.
+A Core MAY declare a USB 2.0 device profile using `N7=USB_DM` and `N8=USB_DP`. This does not make USB universal across Core-S products. Without that declaration, a Station must treat N7/N8 as implementation-specific contacts and isolate its USB path.
+
+The Core supplies MCU- or PHY-specific termination, pull, bias, power-decoupling, and clock provisions. The Station supplies connector-side CC, VBUS protection, ESD protection, and path isolation. USB VBUS must not connect directly to the Core-S +3V3 contact.
+
+The earlier pre-verification `N2=USB_D-`, `N3=USB_D+` draft profile is withdrawn and must not be used for new Core designs. N2/N3 remain the basic debug/data contacts defined by the selected profile.
 
 ## 8. Implementation-specific contacts
 
-`N5-N8`, `E1-E8`, `S1-S8`, and `W1-W8` have physical identities but no universal peripheral mapping. An implementation specification MUST publish, for every contact:
+Unless a Core declares an optional development-port profile, `N5-N8` are implementation-specific. `E1-E8`, `S1-S8`, and `W1-W8` have physical identities but no universal peripheral mapping. An implementation specification MUST publish, for every contact:
 
 - MCU or circuit node;
 - package-pin number where applicable;
@@ -173,4 +177,3 @@ A frozen but untested design may state **designed for** one of these labels. It 
 - reset, debug, and boot operation for each declared system profile;
 - insertion and removal only while unpowered;
 - temperature rise and contact suitability at the declared maximum current.
-
